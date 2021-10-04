@@ -1,5 +1,6 @@
 import re, os
 from pathlib import Path
+import asyncio
 from importlib import import_module, reload
 from pyrogram import Client, filters
 from pyrogram.types import Message
@@ -16,7 +17,10 @@ async def reload_plugins(client: Client, message: Message):
         module_path = '.'.join(path.parent.parts + (path.stem,))
         await reload_handlers(client, module_path, True)
         functions += (await reload_handlers(client, module_path))
-    await message.edit_text("successfully reloaded {} functions from {} plugins\nloaded plugins:\n{}".format(functions, len(files), '\n'.join(files)))
+    await message.edit_text("successfully reloaded **[{}]** functions from **[{}]** plugins\nloaded plugins:\n{}".format(functions, len(files), '\n'.join(files)))
+    await asyncio.sleep(5)
+    await message.delete()
+
 async def reload_handlers(client, file, unload = False):
     functions = 0
     if unload:

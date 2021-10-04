@@ -24,4 +24,3 @@ async def all(client: Client, message: Message):
             ), length=pad.__len__(), user=members[i]['user']))
             text += pad
         await message.reply_text(text, entities=entity)
-
