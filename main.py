@@ -6,7 +6,7 @@ from pyrogram import filters
 
 client = Client('user', config_file='config.ini')
 
-VERSION = 2.0
+VERSION = 1.0
 
 
 
@@ -22,6 +22,8 @@ async def help(client: Client, message: Message):
     help = """
     version: Return current version
     help: Return this help message
+    
+    Source: (MasihSelf)[https://github.com/Masihgh/MasihSelf]
     """
     i = 0
     
