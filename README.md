@@ -5,7 +5,7 @@
 * [1] pip: -r requirements.txt
 
 * [3] delete ``-example`` in config.ini
-* [4] Go to (My Telegram)[https://my.telegram.org]
+* [4] Go to [https://my.telegram.org]
 * [5] Create API 
 * [6] Get ``API Key`` And ``API Hash`` and replace in ``config.ini``
 * [7] if use proxy in system set True Proxy And Config
