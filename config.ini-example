@@ -1,6 +1,0 @@
-[pyrogram]
-api_id = TELEGRAM HASH ID
-api_hash = TELEGRAM HASH ID
-
-[plugins]
-root = plugins
