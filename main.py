@@ -31,7 +31,7 @@ else:
         api_id=API_ID,
         api_hash=API_HASH
     )
-VERSION = 2.0
+VERSION = 2.2
 @client.on_message(filters.regex('^version$', re.I) & filters.me)
 async def version(client: Client, message: Message):
     await message.edit("Version {}".format(VERSION))
