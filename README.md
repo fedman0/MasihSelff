@@ -1,7 +1,7 @@
 # MasihSelf V2.2
-created by https://github.com/Masihgh/MasihSelf && animations increased by : https://github.com/SM4RT0/MasihSelf/
+created by https://github.com/Masihgh/MasihSelf && animations increased by : https://github.com/white-bl4ck/MasihSelf/
 ## How Usage
-    [0] git clone https://github.com/SM4RT0/MasihSelf.git
+    [0] git clone https://github.com/white-bl4ck/MasihSelf.git
     [1] cd MasihSelf && pip install -r requirements.txt
     [2] Open main.py in your favorite text editor.
     [3] Look for the lines that say api_id and api_hash.
