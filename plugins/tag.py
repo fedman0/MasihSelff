@@ -1,26 +1,42 @@
 from base64 import b64decode
 import re
-from pyrogram.client import Client
-from pyrogram.types import MessageEntity
-from pyrogram.types.messages_and_media.message import Message
-from pyrogram import filters
+from pyrogram import Client, filters
+from pyrogram.types import MessageEntity, Message
+from pyrogram.enums import MessageEntityType
+
 help = """
 @all INT: Split messages mention by INT
 """
+
 @Client.on_message(filters.regex(r'^@all', re.I) & filters.group & filters.me)
 async def all(client: Client, message: Message):
     n = 100
-    part = message.text.split(' ')
-    if len(part) == 2:
+    part = message.text.strip().split(' ')
+    if len(part) == 2 and part[1].isdigit():
         n = int(part[1])
-    all = await client.get_chat_members(message.chat.id, 0, await client.get_chat_members_count(message.chat.id))
+
+    members = []
+    async for m in client.get_chat_members(message.chat.id):
+        if m.user.is_bot:
+            continue
+        members.append(m)
+
     pad = b64decode("4oGj").decode('utf-8')
-    chunk = [all[i:i + n] for i in range(0, len(all), n)]
-    for members in chunk:
+    chunks = [members[i:i + n] for i in range(0, len(members), n)]
+
+    for group in chunks:
         text = "آهای جماعت"
-        entity = [MessageEntity(type="code", offset=0, length=text.__len__())]
-        for i in range(len(members)):
-            entity.append(MessageEntity(type="text_mention", offset=text.__len__(
-            ), length=pad.__len__(), user=members[i]['user']))
+        entities = [MessageEntity(type=MessageEntityType.CODE, offset=0, length=len(text))]
+
+        for m in group:
+            entities.append(
+                MessageEntity(
+                    type=MessageEntityType.TEXT_MENTION,
+                    offset=len(text),
+                    length=len(pad),
+                    user=m.user
+                )
+            )
             text += pad
-        await message.reply_text(text, entities=entity)
+
+        await message.reply_text(text, entities=entities)
